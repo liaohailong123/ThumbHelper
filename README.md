@@ -2,10 +2,11 @@
     1，获取多媒体文件中的一连串视频缩略图，使用Android系统原生的Media框架和FFmpeg，可自主切换。
     2，MediaUtil.getMetaData() 函数，可获取到多媒体文件的音视频基本信息
 
-精准模式：画面渲染跟播放器渲染的内容一致。
-非精准模式：画面渲染使用最近的I帧
-平台解码：MediaCodec
-非平台解码：FFmpeg
+## 配置参数
+    精准模式：画面渲染跟播放器渲染的内容一致。
+    非精准模式：画面渲染使用最近的I帧
+    平台解码：MediaCodec
+    非平台解码：FFmpeg
 
 <img src="https://github.com/liaohailong123/ThumbHelper/blob/main/images/example01.gif" alt="科学上网 或 Github 加速器" width="224px">
 
