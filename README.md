@@ -7,7 +7,7 @@
 平台解码：MediaCodec
 非平台解码：FFmpeg
 
-<img src="https://github.com/liaohailong190/ThumbHelper/blob/master/images/example01.gif" alt="科学上网 或 Github 加速器" width="224px">
+<img src="https://github.com/liaohailong123/ThumbHelper/blob/main/images/example01.gif" alt="科学上网 或 Github 加速器" width="224px">
 
 使用方式：将base_thumb模块生成aar包，直接拷到自己的工程中依赖即可，minSdk=21
 
