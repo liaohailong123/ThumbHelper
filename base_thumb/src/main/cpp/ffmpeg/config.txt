@@ -1,0 +1,4 @@
+使用ndk 编译 ffmpeg环境配置
+OS System = Ubuntu 18.04.5 on Windows
+ffmpeg version = ffmpeg-7.0.1
+ndk version = 20.1.5948944

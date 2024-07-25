@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">HelloOpenGLES</string>
+    <string name="introduce">
+        第一步：点击右侧的精准模式按钮，可切换不同的模式\n
+        \t\t\t\t精准模式：开，内容准确，耗时高\n
+        \t\t\t\t精准模式：关，内容可能不准确，耗时低\n
+        第二步：点击”获取视频“按钮，选择一个视频\n
+        第三步：点击底部”重获缩略图“，可重新加载一次视频帧
+    </string>
+</resources>
