@@ -37,7 +37,7 @@ class HelloEGLContext : public IGLContext
 public:
     HelloEGLContext();
 
-    ~HelloEGLContext();
+    ~HelloEGLContext() override;
 
     int init(void *sharedContext) override;
 
@@ -45,7 +45,9 @@ public:
 
     void renderStart() override;
 
-    bool renderEnd(int64_t pts = -1) override;
+    bool renderEnd();
+
+    bool renderEnd(int64_t ptsUs) override;
 
     int getWidth() override;
 

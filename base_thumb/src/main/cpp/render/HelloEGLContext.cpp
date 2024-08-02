@@ -124,15 +124,20 @@ void HelloEGLContext::renderStart()
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 }
 
-bool HelloEGLContext::renderEnd(int64_t pts)
+bool HelloEGLContext::renderEnd()
+{
+    return renderEnd(-1);
+}
+
+bool HelloEGLContext::renderEnd(int64_t ptsUs)
 {
     // 着色器代码运行完毕，绘制好内容之后，交换前后缓冲区，让画面更新
     bool b1 = eglSwapBuffers(eglDisplay, eglSurface);
     bool b2 = true;
-    if (pts >= 0)
+    if (ptsUs >= 0)
     {
         // 通知 MediaCodec 编码画面内容
-        b2 = eglPresentationTimeANDROID(eglDisplay, eglSurface, 10);
+        b2 = eglPresentationTimeANDROID(eglDisplay, eglSurface, ptsUs);
     }
     return b1 && b2;
 }

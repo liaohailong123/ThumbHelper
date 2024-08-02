@@ -16,12 +16,9 @@
 class IGLContext
 {
 public:
-    IGLContext() {};
+    IGLContext() = default;
 
-    virtual ~IGLContext()
-    {
-
-    };
+    virtual ~IGLContext() = default;
 
     virtual int init(void *sharedContext) = 0;
 
@@ -29,7 +26,7 @@ public:
 
     virtual void renderStart() = 0;
 
-    virtual bool renderEnd(int64_t pts = -1) = 0;
+    virtual bool renderEnd(int64_t ptsUs) = 0;
 
     virtual int getWidth() = 0;
 

@@ -42,10 +42,10 @@ void nativeRenderStart(JNIEnv *env, jobject thiz, jlong ptr)
     glContext->renderStart();
 }
 
-jboolean nativeRenderEnd(JNIEnv *env, jobject thiz, jlong ptr, jlong pts)
+jboolean nativeRenderEnd(JNIEnv *env, jobject thiz, jlong ptr, jlong ptsUs)
 {
     HelloEGLContext *glContext = reinterpret_cast<HelloEGLContext *>(ptr);
-    return glContext->renderEnd(pts);
+    return glContext->renderEnd(ptsUs);
 }
 
 jint nativeGetWidth(JNIEnv *env, jobject thiz, jlong ptr)
