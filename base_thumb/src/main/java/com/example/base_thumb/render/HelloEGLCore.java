@@ -72,17 +72,31 @@ public class HelloEGLCore {
     }
 
     private void initProjectMatrix(float[] projectM) {
-//        // 创建正交投影：
-//        float left = -1;
-//        float right = 1;
-//        float bottom = -1;
-//        float top = 1;
-//        float near = 1.0f;
-//        float far = 100f;
-//        Matrix.orthoM(projectM, 0, left, right, bottom, top, near, far);
+        // 创建正交投影：
+        float[] project = new float[4 * 4];
+        float left = -1.0f; // 左边界
+        float right = 1.0f; // 右边界
+        float bottom = -1.0f; // 下边界
+        float top = 1.0f; // 上边界
+        float near = 0.1f; // 裁剪离相机最近的距离(Z轴坐标)
+        float far = 100f; // 裁剪离相机最远的距离(Z轴坐标)
+        Matrix.orthoM(project, 0, left, right, bottom, top, near, far);
 
-        // 2D画面，初始化矩阵即可
-        Matrix.setIdentityM(projectM, 0);
+        // 创建相机位置，站在(0.0,0.0,3.0)朝原点看，头顶为Y轴正上方
+        float[] camera = new float[4 * 4];
+        float eyeX = 0.0f; // 相机位置
+        float eyeY = 0.0f;
+        float eyeZ = 3.0f;
+        float centerX = 0.0f; // 看原点
+        float centerY = 0.0f;
+        float centerZ = 0.0f;
+        float upX = 0.0f; // 头顶朝向
+        float upY = 1.0f;
+        float upZ = 0.0f;
+        Matrix.setLookAtM(camera, 0, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
+
+        // 矩阵相乘：project * view
+        Matrix.multiplyMM(projectM,0,project,0,camera,0);
     }
 
     public void post(Runnable runnable) {
