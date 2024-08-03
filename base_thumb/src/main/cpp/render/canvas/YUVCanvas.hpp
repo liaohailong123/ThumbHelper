@@ -17,11 +17,11 @@ class YUVCanvas : public ICanvas
 public:
     explicit YUVCanvas(ANativeWindow *surface, int width, int height);
 
-    ~YUVCanvas();
+    ~YUVCanvas() override;
 
-    void onEGLCreated();
+    void onEGLCreated() override;
 
-    void draw(std::unique_ptr<TexImage> image);
+    void draw(std::unique_ptr<TexImage> image) override;
 
 private:
     glm::mat4 prjMat4;

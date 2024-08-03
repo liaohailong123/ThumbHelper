@@ -66,19 +66,19 @@ void OESGLProgram::draw(int width, int height, float projectMat[4 * 4])
     glUniform1i(texture, 0);
 
     // 配置矩阵
-    auto viewModelMat4 = glm::identity<glm::mat4>();
+    auto modelMat4 = glm::identity<glm::mat4>();
     glm::mat4 _projectMat4 = glm::make_mat4(projectMat);
 
     // 纹理坐标旋转
     float rotation = getRotation();
     float angle = glm::radians(rotation);
     glm::vec3 axis(0.0f, 0.0f, 1.0f); // 旋转轴是 Z 轴
-    viewModelMat4 = glm::rotate(viewModelMat4, angle, axis);
+    modelMat4 = glm::rotate(modelMat4, angle, axis);
     // 镜像操作
     glUniform1i(hMirror, hMirrorVal ? 1 : 0); // 水平镜像
     glUniform1i(vMirror, vMirrorVal ? 1 : 0); // 垂直镜像
     // 计算出mvp矩阵
-    glm::mat4 mvpMat4 = viewModelMat4 * _projectMat4;
+    glm::mat4 mvpMat4 = _projectMat4 * modelMat4;
 
     glUniformMatrix4fv(mvpM, 1, GL_FALSE, glm::value_ptr(mvpMat4));
 

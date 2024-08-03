@@ -141,17 +141,17 @@ void YUVGLProgram::draw(int width, int height, float projectMat[4 * 4])
     glUniform1i(v_tex, 2);
 
     // 配置矩阵
-    auto viewModelMat4 = glm::identity<glm::mat4>();
+    auto modelMat4 = glm::identity<glm::mat4>();
     glm::mat4 _projectMat4 = glm::make_mat4(projectMat);
 
     // 纹理坐标旋转
     float rotation = getRotation();
     float angle = glm::radians(rotation);
     glm::vec3 axis(0.0f, 0.0f, 1.0f); // 旋转轴是 Z 轴
-    viewModelMat4 = glm::rotate(viewModelMat4, angle, axis);
+    modelMat4 = glm::rotate(modelMat4, angle, axis);
 
     // 计算出mvp矩阵
-    glm::mat4 mvpMat4 = viewModelMat4 * _projectMat4;
+    glm::mat4 mvpMat4 = _projectMat4 * modelMat4;
 
     // 第三个参数，transpose 表示是否需要 转置矩阵：将行与列交换（对称矩阵）
     glUniformMatrix4fv(mvpM, 1, GL_FALSE, glm::value_ptr(mvpMat4));
