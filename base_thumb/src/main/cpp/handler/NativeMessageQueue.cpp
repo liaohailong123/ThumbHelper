@@ -9,14 +9,12 @@ NMessageQueue::NMessageQueue()
         : idleHandlers(), message(nullptr), quitting(false),
           blocked(false)
 {
-//    LOGI("NMessageQueue 构造函数执行 %p", this)
     memset(fd, 0, NUM(fd));
     init();
 }
 
 NMessageQueue::~NMessageQueue()
 {
-//    LOGI("~NMessageQueue 析构函数执行 %p", this)
     destroy();
 }
 
@@ -82,7 +80,7 @@ void NMessageQueue::pollOnce(int timeoutMillis)
     {
         const char *desc = strerror(errno);
         // 这里出现了问题
-        LOGI("pollOnce select = -1: %s", desc)
+        NHLog::instance()->i("pollOnce select = -1: %s", desc);
         return;
     }
 

@@ -15,18 +15,76 @@
 #include <unordered_map> // map
 #include <vector> // 可扩容数组
 #include <memory> // 智能指针
-
-// Android输出log日志
-#include "../util/LogUtil.hpp"
-
-// 宏定义写法，简化代码，在预编译期间转换成代码
-#define LOGI(...) AndroidLog::info("Victor",__VA_ARGS__);
+#include <cstdarg> // 取出可扩展参数 ...
 
 #define NUM(arr) (sizeof(arr)/sizeof(arr[0]))
 
 struct NMessage;
 
 class NHandler;
+
+/**
+ * 打印 log 信息
+ * NativeHandlerLog
+ */
+class NHLog
+{
+public:
+    explicit NHLog() = default;
+
+    virtual  ~NHLog() = default;
+
+    // log日志的全局默认tag
+    const char *defaultTag = "NHLog";
+
+    // 外部注册的 log 打印函数
+    int (*onLogPrint)(const char *tag, const char *format, ...);
+
+
+    int i(const char *format, ...)
+    {
+        va_list args;
+        va_start(args, format);
+        int status = i(defaultTag, format, args);
+        va_end(args);
+        return status;
+    }
+
+    int i(const char *tag, const char *format, ...)
+    {
+        if (onLogPrint != nullptr)
+        {
+            va_list args;
+            va_start(args, format);
+            int status = onLogPrint(tag, format, args);
+            va_end(args);
+            return status;
+        }
+
+        return -1;
+    }
+
+private:
+    static std::once_flag flag; // C++11标准库，多线程安全，只调用一次
+    static NHLog *sInstance;
+
+    static void CreateInstance()
+    {
+        if (sInstance == nullptr)
+        {
+            sInstance = new NHLog();
+        }
+    }
+
+public:
+    static NHLog *instance()
+    {
+        std::call_once(flag, CreateInstance);
+        return sInstance;
+    }
+
+};
+
 
 /**
  * 可执行任务Runnable
@@ -74,12 +132,12 @@ class NIdleHandler
 public:
     NIdleHandler()
     {
-        LOGI("NIdleHandler() address: %p", this)
+        NHLog::instance()->i("NIdleHandler() address: %p", this);
     }
 
     virtual ~NIdleHandler()
     {
-        LOGI("~NIdleHandler() address: %p", this)
+        NHLog::instance()->i("~NIdleHandler() address: %p", this);
     }
 
     /**

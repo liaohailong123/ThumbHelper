@@ -4,6 +4,9 @@
 
 #include "NativeHandler.hpp"
 
+// log日志初始化
+std::once_flag NHLog::flag;
+NHLog *NHLog::sInstance = nullptr;
 
 long NSystemClock::uptimeMillis()
 {
@@ -15,7 +18,7 @@ long NSystemClock::uptimeMillis()
 NHandler::NHandler(HandlerMessage callback) : onDispatchMessage(callback),
                                               looper(NLooper::myLooper())
 {
-    LOGI("NHandler 构造函数执行")
+    NHLog::instance()->i("NHandler 构造函数执行");
     if (looper != nullptr)
     {
         messageQueue = looper->getQueue();
@@ -24,7 +27,7 @@ NHandler::NHandler(HandlerMessage callback) : onDispatchMessage(callback),
 
 NHandler::~NHandler()
 {
-    LOGI("~NHandler 析构函数执行")
+    NHLog::instance()->i("~NHandler 析构函数执行");
 }
 
 

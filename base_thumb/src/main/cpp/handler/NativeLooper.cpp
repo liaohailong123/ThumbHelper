@@ -9,12 +9,12 @@ std::mutex NLooper::sMutex = {};
 
 NLooper::NLooper() : messageQueue(new NMessageQueue()), looping(false)
 {
-    LOGI("NLooper 构造函数执行")
+    NHLog::instance()->i("NLooper 构造函数执行");
 }
 
 NLooper::~NLooper()
 {
-    LOGI("~NLooper 析构函数执行")
+    NHLog::instance()->i("~NLooper 析构函数执行");
     if (messageQueue != nullptr)
     {
         delete messageQueue;

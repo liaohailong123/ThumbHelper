@@ -25,8 +25,6 @@
 // Android输出log日志
 #include "../util/LogUtil.hpp"
 
-#define LOGI(...) AndroidLog::info("HelloEGLContext",__VA_ARGS__);
-
 /**
  * create by liaohailong
  * 2024/6/13 22:25
@@ -55,6 +53,7 @@ public:
 
 
 private:
+    Logger logger;
     EGLDisplay eglDisplay;
     EGLConfig eglConfig;
     EGLContext eglContext;

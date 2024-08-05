@@ -5,6 +5,7 @@
 
 #include "JniInit.hpp"
 #include "../util/LogUtil.hpp"
+#include "../handler/NativeHandler.hpp"
 
 #define LOG_TAG "JniInit.cpp"
 #define REG_JNI(name) {name, #name}
@@ -59,6 +60,22 @@ static int register_jni_procs(const RegJNIRec array[], size_t count, JNIEnv *env
     return 0;
 }
 
+/**
+ * 给 NativeHandler 定义log日志打印功能
+ * @param tag log的分类tag
+ * @param format 格式化文本
+ * @param ... 格式化文本中的填入参数，可选
+ * @return 0=success
+ */
+int onLogPrint(const char *tag, const char *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    int status = AndroidLog::info(tag, format, args);
+    va_end(args);
+    return status;
+}
+
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 {
     // 创建env指针，选用jni1.6版本
@@ -74,6 +91,10 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
     // 动态注册jni函数
     int num = ((int) sizeof(gRegJNI) / sizeof(gRegJNI[0]));
     register_jni_procs(gRegJNI, num, env);
+
+    // NativeHandler 配置log打印
+    NHLog::instance()->defaultTag = "Victor";
+    NHLog::instance()->onLogPrint = onLogPrint;
 
     // 告知虚拟机，使用jni1.6版本
     return JNI_VERSION_1_6;

@@ -13,12 +13,12 @@ NHandlerThread::NHandlerThread(std::string _name, HandlerMessage _callback) : na
                                                                               args(nullptr),
                                                                               handler(nullptr)
 {
-    LOGI("NHandlerThread[%s] 构造函数执行", name.c_str())
+    NHLog::instance()->i("NHandlerThread[%s] 构造函数执行", name.c_str());
 }
 
 NHandlerThread::~NHandlerThread()
 {
-    LOGI("~NHandlerThread[%s] 析构函数执行", name.c_str())
+    NHLog::instance()->i("~NHandlerThread[%s] 析构函数执行", name.c_str());
     quite();
 }
 

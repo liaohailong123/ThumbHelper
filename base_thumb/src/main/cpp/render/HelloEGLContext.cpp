@@ -5,9 +5,9 @@
 #include "HelloEGLContext.hpp"
 
 
-HelloEGLContext::HelloEGLContext() : width(-1), height(-1)
+HelloEGLContext::HelloEGLContext() : logger("HelloEGLContext"), width(-1), height(-1)
 {
-    LOGI("HelloEGLContext::HelloEGLContext()")
+    logger.i("HelloEGLContext::HelloEGLContext()");
 }
 
 HelloEGLContext::~HelloEGLContext()
@@ -19,11 +19,11 @@ HelloEGLContext::~HelloEGLContext()
     if (!eglDestroyContext(eglDisplay, eglContext))
     {
         EGLint error = eglGetError();
-        LOGI("eglDestroyContext error[%d]", error)
+        logger.i("eglDestroyContext error[%d]", error);
     }
     eglTerminate(eglDisplay);
 
-    LOGI("HelloEGLContext::~HelloEGLContext()")
+    logger.i("HelloEGLContext::~HelloEGLContext()");
 }
 
 int HelloEGLContext::init(void *sharedContext)
@@ -34,11 +34,11 @@ int HelloEGLContext::init(void *sharedContext)
     int minor[1];
     if (!eglInitialize(eglDisplay, major, minor))
     {
-        LOGI("eglInitialize error : %d", eglGetError())
+        logger.i("eglInitialize error : %d", eglGetError());
         return -1;
     }
 
-    LOGI("eglInitialize success major = %d, minor = %d", major[0], minor[0])
+    logger.i("eglInitialize success major = %d, minor = %d", major[0], minor[0]);
 
     int attr_list[] = {
             EGL_RED_SIZE, 8,
@@ -58,7 +58,7 @@ int HelloEGLContext::init(void *sharedContext)
     // 配置属性，得到EGLConfig，后续创建 EGLSurface 会用到
     if (!eglChooseConfig(eglDisplay, attr_list, configs, num, num_config))
     {
-        LOGI("eglChooseConfig error : %d", eglGetError())
+        logger.i("eglChooseConfig error : %d", eglGetError());
         return -1;
     }
 
@@ -77,11 +77,11 @@ int HelloEGLContext::init(void *sharedContext)
     eglContext = eglCreateContext(eglDisplay, eglConfig, sharedContext, attr_list2);
     if (eglContext == EGL_NO_CONTEXT)
     {
-        LOGI("eglCreateContext error : %d", eglGetError())
+        logger.i("eglCreateContext error : %d", eglGetError());
         return -1;
     }
 
-    LOGI("eglCreateContext created success!")
+    logger.i("eglCreateContext created success!");
     return 0;
 }
 
@@ -99,11 +99,11 @@ int HelloEGLContext::setSurface(void *_surface)
     // 确定使用当前 EGLSurface 作为前置缓冲区buffer运送的目的地
     if (!eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext))
     {
-        LOGI("eglMakeCurrent error : %d", eglGetError())
+        logger.i("eglMakeCurrent error : %d", eglGetError());
         return -1;
     }
 
-    LOGI("eglMakeCurrent success!")
+    logger.i("eglMakeCurrent success!");
 
     // 下面这个接口是 Android 平台特有，跟 MediaCodec 搭配使用，当渲染缓冲区交换之后，调用此函数，通知 MediaCodec 进行编码
     // 检查eglPresentationTimeANDROID函数是否有效
@@ -112,9 +112,9 @@ int HelloEGLContext::setSurface(void *_surface)
                     "eglPresentationTimeANDROID"));
     if (!pfneglPresentationTimeANDROID)
     {
-        LOGI("eglPresentationTimeANDROID is not available!")
+        logger.i("eglPresentationTimeANDROID is not available!");
     } else
-        LOGI("eglPresentationTimeANDROID is available!")
+        logger.i("eglPresentationTimeANDROID is available!");
     return 0;
 }
 

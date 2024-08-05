@@ -2,17 +2,17 @@
     1，获取多媒体文件中的一连串视频缩略图，使用Android系统原生的Media框架和FFmpeg，可自主切换。
     2，MediaUtil.getMetaData() 函数，可获取到多媒体文件的音视频基本信息
 
-## 配置参数
+## 可调整参数
     精准模式：画面渲染跟播放器渲染的内容一致。
     非精准模式：画面渲染使用最近的I帧
     平台解码：MediaCodec
-    非平台解码：FFmpeg
+    非平台解码：FFmpeg(ffmpeg-7.0.1)
 
 <img src="https://github.com/liaohailong123/ThumbHelper/blob/main/images/example01.gif" alt="科学上网 或 Github 加速器" width="224px">
 
 使用方式：将base_thumb模块生成aar包，直接拷到自己的工程中依赖即可，minSdk=21
 
-在Activity中调用以下代码，调起图片裁剪界面
+示例代码：
 ```
         MetaData metaData = MediaUtil.getMetaData(filePath);
 
