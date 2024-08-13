@@ -267,7 +267,7 @@ public class SystemVideoDecoder implements IVideoDecoder {
         }
     }
 
-    private synchronized boolean canRenderFrame(long timestamps) {
+    private boolean canRenderFrame(long timestamps) {
         synchronized (renderFrameMap) {
             if (!exactly) return true;
             Integer unRenderCount = renderFrameMap.get(timestamps);
@@ -276,7 +276,7 @@ public class SystemVideoDecoder implements IVideoDecoder {
         }
     }
 
-    private synchronized void signRenderFrame(long timestamps) {
+    private void signRenderFrame(long timestamps) {
         synchronized (renderFrameMap) {
             Integer count = renderFrameMap.get(timestamps);
             if (count != null) {
