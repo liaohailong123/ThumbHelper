@@ -105,6 +105,16 @@ int HelloEGLContext::setSurface(void *_surface)
 
     logger.i("eglMakeCurrent success!");
 
+
+    // 把绘制内容输出到多个output上
+//    EGLSurface eglSurfaceArr[] = {eglSurface1,eglSurface2,eglSurface3,eglSurface4};
+//    for (const auto &item: eglSurfaceArr)
+//    {
+//        eglMakeCurrent
+//        draw OpenGL ES
+//        eglSwapBuffers()
+//    }
+
     // 下面这个接口是 Android 平台特有，跟 MediaCodec 搭配使用，当渲染缓冲区交换之后，调用此函数，通知 MediaCodec 进行编码
     // 检查eglPresentationTimeANDROID函数是否有效
     auto pfneglPresentationTimeANDROID
