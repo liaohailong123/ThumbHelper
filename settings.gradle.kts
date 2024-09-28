@@ -1,5 +1,12 @@
 pluginManagement {
     repositories {
+        // 阿里云镜像
+        maven("https://maven.aliyun.com/nexus/content/groups/public/")
+        maven("https://maven.aliyun.com/nexus/content/repositories/google")
+        maven("https://maven.aliyun.com/nexus/content/repositories/jcenter")
+        maven("https://maven.aliyun.com/nexus/content/repositories/central")
+        maven("https://maven.aliyun.com/nexus/content/repositories/gradle-plugin")
+
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -14,6 +21,13 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        // 阿里云镜像
+        maven("https://maven.aliyun.com/nexus/content/groups/public/")
+        maven("https://maven.aliyun.com/nexus/content/repositories/google")
+        maven("https://maven.aliyun.com/nexus/content/repositories/jcenter")
+        maven("https://maven.aliyun.com/nexus/content/repositories/central")
+        maven("https://maven.aliyun.com/nexus/content/repositories/gradle-plugin")
+
         google()
         mavenCentral()
     }
