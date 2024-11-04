@@ -22,9 +22,6 @@ public:
     void onEGLCreated() override;
 
     void draw(std::unique_ptr<TexImage> image) override;
-
-private:
-    glm::mat4 prjMat4;
 };
 
 

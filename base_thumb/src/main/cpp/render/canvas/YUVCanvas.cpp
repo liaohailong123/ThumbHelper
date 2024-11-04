@@ -8,8 +8,7 @@
 YUVCanvas::YUVCanvas(ANativeWindow *surface, int width, int height) : ICanvas(surface,
                                                                               width,
                                                                               height,
-                                                                              "YUVCanvas"),
-                                                                      prjMat4()
+                                                                              "YUVCanvas")
 {
     logger.i("YUVCanvas::YUVCanvas(w=%d,h=%d)", width, height);
 

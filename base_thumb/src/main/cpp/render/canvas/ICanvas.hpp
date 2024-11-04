@@ -30,6 +30,11 @@ public:
     virtual ~ICanvas();
 
     /**
+     * 初始化项目矩阵：默认初始化成正交投影矩阵
+     */
+    virtual void initProjectMat4();
+
+    /**
      * 渲染线程 和 EGL环境创建好后回调
      */
     virtual void onEGLCreated() = 0;
@@ -43,6 +48,7 @@ protected:
     Logger logger;
     ANativeWindow *surface; // 渲染surface
     int width, height; // 视口大小
+    glm::mat4 prjMat4; // 项目矩阵：默认正交投影
     NHandlerThread *renderThread; // 渲染线程
     NHandler *renderHandler; // 渲染Handler
 
