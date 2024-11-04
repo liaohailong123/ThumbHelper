@@ -7,6 +7,8 @@
 
 
 #include <string>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 
 /*
  * OpenGL 常用于桌面端开发（Mac Windows Linux）
@@ -90,6 +92,14 @@ namespace GLSLUtil
      * @return 着色器源代码
      */
     std::string loadRawSource(const char *name);
+
+    /**
+     * 创建OES纹理
+     * @param textures 这个数组用来接收待创建的OES纹理
+     * @param size 数组有效长度（创建个数）
+     * @return 0=success -1=error
+     */
+    int generateOESTexture(GLuint *textures, int size);
 }
 
 
