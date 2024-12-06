@@ -68,13 +68,13 @@ void nativeHelloEGLContextDestroy(JNIEnv *env, jobject thiz, jlong ptr)
 
 
 static JNINativeMethod jniMethods[] = {
-        "nativeInit", "()J", (void *) nativeInit,
-        "nativeSetSurface", "(JLandroid/view/Surface;)I", (void *) nativeSetSurface,
-        "nativeRenderStart", "(J)V", (void *) nativeRenderStart,
-        "nativeRenderEnd", "(JJ)Z", (void *) nativeRenderEnd,
-        "nativeGetWidth", "(J)I", (void *) nativeGetWidth,
-        "nativeGetHeight", "(J)I", (void *) nativeGetHeight,
-        "nativeDestroy", "(J)V", (void *) nativeHelloEGLContextDestroy
+        {"nativeInit", "()J", (void *) nativeInit},
+        {"nativeSetSurface", "(JLandroid/view/Surface;)I", (void *) nativeSetSurface},
+        {"nativeRenderStart", "(J)V", (void *) nativeRenderStart},
+        {"nativeRenderEnd", "(JJ)Z", (void *) nativeRenderEnd},
+        {"nativeGetWidth", "(J)I", (void *) nativeGetWidth},
+        {"nativeGetHeight", "(J)I", (void *) nativeGetHeight},
+        {"nativeDestroy", "(J)V", (void *) nativeHelloEGLContextDestroy}
 };
 
 int register_hello_egl(JNIEnv *env)

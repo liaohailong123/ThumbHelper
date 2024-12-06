@@ -122,14 +122,14 @@ void nativeHelloGLProgramDestroy(JNIEnv *env, jobject thiz, jlong ptr)
 
 
 static JNINativeMethod jniMethods[] = {
-        "nativeInit", "(I)J", (void *) nativeInit,
-        "nativeSetTexture", "(JI)V", (void *) nativeSetTexture,
-        "nativeSetRotation", "(JF)V", (void *) nativeSetRotation,
-        "nativeSetMirror", "(JZZ)V", (void *) nativeSetMirror,
-        "nativeBegin", "(J)Z", (void *) nativeBegin,
-        "nativeDraw", "(JII[F)V", (void *) nativeDraw,
-        "nativeEnd", "(J)V", (void *) nativeEnd,
-        "nativeDestroy", "(J)V", (void *) nativeHelloGLProgramDestroy
+        {"nativeInit", "(I)J", (void *) nativeInit},
+        {"nativeSetTexture", "(JI)V", (void *) nativeSetTexture},
+        {"nativeSetRotation", "(JF)V", (void *) nativeSetRotation},
+        {"nativeSetMirror", "(JZZ)V", (void *) nativeSetMirror},
+        {"nativeBegin", "(J)Z", (void *) nativeBegin},
+        {"nativeDraw", "(JII[F)V", (void *) nativeDraw},
+        {"nativeEnd", "(J)V", (void *) nativeEnd},
+        {"nativeDestroy", "(J)V", (void *) nativeHelloGLProgramDestroy}
 };
 
 extern int register_hello_gl_program(JNIEnv *env)

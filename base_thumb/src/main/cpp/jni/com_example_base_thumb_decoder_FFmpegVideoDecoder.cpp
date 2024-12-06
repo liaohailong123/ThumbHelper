@@ -57,12 +57,12 @@ void nativeAVDecoderDestroy(JNIEnv *env, jobject thiz, jlong ptr)
 }
 
 static JNINativeMethod jniMethods[] = {
-        "nativeInit", "()J", (void *) nativeAVDecoderInit,
-        "nativeSetDataSource", "(JLjava/lang/String;)I", (void *) nativeSetDataSource,
-        "nativeSetSurface", "(JLandroid/view/Surface;)V", (void *) nativeFFSetSurface,
-        "nativeStart", "(J[JZ)V", (void *) nativeStart,
-        "nativeDequeueNextFrame", "(J)V", (void *) nativeDequeueNextFrame,
-        "nativeDestroy", "(J)V", (void *) nativeAVDecoderDestroy
+        {"nativeInit", "()J", (void *) nativeAVDecoderInit},
+        {"nativeSetDataSource", "(JLjava/lang/String;)I", (void *) nativeSetDataSource},
+        {"nativeSetSurface", "(JLandroid/view/Surface;)V", (void *) nativeFFSetSurface},
+        {"nativeStart", "(J[JZ)V", (void *) nativeStart},
+        {"nativeDequeueNextFrame", "(J)V", (void *) nativeDequeueNextFrame},
+        {"nativeDestroy", "(J)V", (void *) nativeAVDecoderDestroy}
 };
 
 int register_ffmpeg_decoder(JNIEnv *env)
